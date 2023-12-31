@@ -1,4 +1,3 @@
-
 /** @OnlyCurrentDoc */
 
 function bureau_individuel(persons) {
@@ -36,21 +35,33 @@ function espace_commun() {
 function addup(a_named_range) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var spreadsheet = ss.getSheetByName("Surface");
-  var nm_ranges = spreadsheet.getNamedRanges();
-  Logger.log("Range names: " + nm_ranges);
   var total = 0;
-  for (var i = 0; i < nm_ranges.length; i++) {
-    Logger.log("nm_rg: " + nm_ranges[i]);
-    if (nm_ranges[i].getName().includes(a_named_range)) {
-      var vals = nm_ranges[i].getRange().getValues();
-      for (var j=0; j< vals.length; j++) {
-        if (typeof vals[j][0] === 'number') {
-          total += vals[j][0];
-        }
-      }
-      break;
+
+  var range = ss.getRangeByName(a_named_range);
+  var rangeRows = range.getNumRows();
+  Logger.log("Number rows: "+rangeRows);
+  var values = spreadsheet.getRange(range.getRowIndex(), range.getColumn(),rangeRows, 1).getValues();
+  for(var i = 0; i < values.length; i++) {
+    Logger.log("Val: "+ values[i][0]);
+    if (typeof values[i][0] === 'number') {
+      total += values[i][0];
     }
   }
+
+  // var nm_ranges = spreadsheet.getNamedRanges();
+  // Logger.log("Range names: " + nm_ranges);
+  // for (var i = 0; i < nm_ranges.length; i++) {
+  //   Logger.log("nm_rg: " + nm_ranges[i]);
+  //   if (nm_ranges[i].getName().includes(a_named_range)) {
+  //     var vals = nm_ranges[i].getRange().getValues();
+  //     for (var j=0; j< vals.length; j++) {
+  //       if (typeof vals[j][0] === 'number') {
+  //         total += vals[j][0];
+  //       }
+  //     }
+  //     break;
+  //   }
+  // }
   Logger.log("total: " + total);
   return total;
 }
@@ -132,6 +143,3 @@ function insertCellImage(imageUrl, altTitle = "", altDescription = "") {
                  .build();
   return image;
 }
-
-
-
