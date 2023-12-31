@@ -1,3 +1,4 @@
+
 /** @OnlyCurrentDoc */
 
 function bureau_individuel(persons) {
@@ -54,36 +55,11 @@ function addup(a_named_range) {
   return total;
 }
 
-function add_salle() {
-  add_item('Espace commun',2 , "=salle_reunion(C")
-}
-
 function delete_salle() {
-  // var ss = SpreadsheetApp.getActiveSpreadsheet();
-  // var spreadsheet = ss.getSheetByName("Surface");
-  // spreadsheet.activate();
-  // var open_space = spreadsheet.createTextFinder('Espace commun').findNext();
-  // open_space.activate();  // Activate range
-  // var row_to_del = open_space.offset(-2,0,1,1)
-  // var prev_row = row_to_del.offset(-1,0,1,1).getValue();
-  // if (!prev_row.toString().includes("Salle")) {
-  //   spreadsheet.deleteRow(row_to_del.getRow())
-  // }
   delete_item("Salle", 'Espace commun')
 }
 
 function delete_bureau() {
-  // var ss = SpreadsheetApp.getActiveSpreadsheet();
-  // var spreadsheet = ss.getSheetByName("Surface");
-  // spreadsheet.activate();
-  // var open_space = spreadsheet.createTextFinder('Open space').findNext();
-  // // spreadsheet.getRange('8:8').activate();
-  // open_space.activate();  // Activate range
-  // var row_to_del = open_space.offset(-2,0,1,1)
-  // var prev_row = row_to_del.offset(-1,0,1,1).getValue();
-  // if (!prev_row.toString().includes("Bureau")) {
-  //   spreadsheet.deleteRow(row_to_del.getRow())
-  // }
   delete_item("Bureau", 'Open space');
 }
 
@@ -99,6 +75,10 @@ function delete_item(item, entity) {
   if (!prev_row.toString().includes(item)) {
     spreadsheet.deleteRow(row_to_del.getRow())
   }
+}
+
+function add_salle() {
+  add_item('Espace commun',2 , "=salle_reunion(C")
 }
 
 function add_bureau_partage() {
